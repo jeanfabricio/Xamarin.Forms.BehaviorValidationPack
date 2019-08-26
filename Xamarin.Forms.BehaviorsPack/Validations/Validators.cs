@@ -29,6 +29,8 @@ namespace Xamarin.Forms.BehaviorValidationPack
             cpf = cpf.Replace(".", "").Replace("-", "");
             if (cpf.Length != 11)
                 return false;
+            if (invalidNumbers.Contains(cpf))
+                return false;
             tempCpf = cpf.Substring(0, 9);
             soma = 0;
 
@@ -51,6 +53,20 @@ namespace Xamarin.Forms.BehaviorValidationPack
                 resto = 11 - resto;
             digito = digito + resto.ToString();
             return cpf.EndsWith(digito);
+
+            string[] invalidNumbers =
+            {
+                "00000000000",
+                "11111111111",
+                "22222222222",
+                "33333333333",
+                "44444444444",
+                "55555555555",
+                "66666666666",
+                "77777777777",
+                "88888888888",
+                "99999999999"
+            };
         }
 
         internal static bool CnpjValidator(string cnpj)
